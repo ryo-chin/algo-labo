@@ -16,9 +16,9 @@ func TestBubbleSort(t *testing.T) {
 }
 
 func TestQuickSort(t *testing.T) {
-	a := []int{2, 8, 6, 4, 9, 10}
+	a := []int{2, 8, 6, 4, 9, 10, 3, 7, -1}
 	sorted := QuickSort(a)
-	expected := []int{2, 4, 6, 8, 9, 10}
+	expected := []int{-1, 2, 3, 4, 6, 7, 8, 9, 10}
 	if !reflect.DeepEqual(sorted, expected) {
 		t.Error(fmt.Sprintf("Not correct sorted: sorted=%v, expected=%v", sorted, expected))
 	}
