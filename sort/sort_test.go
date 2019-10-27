@@ -16,9 +16,10 @@ func TestBubbleSort(t *testing.T) {
 }
 
 func TestQuickSort(t *testing.T) {
-	a := []int{2, 8, 6, 4, 9, 10, 3, 7, -1}
+	a := []int{-317, -381, -14, -215, -590, -243, -412, 380, -312, 925, 158, -46, 177, 22, -482, 273, 217, 514, -392, 424}
 	sorted := QuickSort(a)
-	expected := []int{-1, 2, 3, 4, 6, 7, 8, 9, 10}
+	println(fmt.Sprintf("complete: a=%v", a))
+	expected := []int{-590, -482, -412, -392, -381, -317, -312, -243, -215, -46, -14, 22, 158, 177, 217, 273, 380, 424, 514, 925}
 	if !reflect.DeepEqual(sorted, expected) {
 		t.Error(fmt.Sprintf("Not correct sorted: sorted=%v, expected=%v", sorted, expected))
 	}

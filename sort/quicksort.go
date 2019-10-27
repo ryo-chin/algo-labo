@@ -3,34 +3,27 @@ package sort
 import "fmt"
 
 func QuickSort(a []int) []int {
-	println(fmt.Sprintf("array %v", a))
 	if len(a) < 2 {
 		return a
 	}
 	pivot := findPivot(a)
 
 	left, right := 0, len(a)-1
-	leftCur, rightCur := 0, len(a)-1
+	for left < right {
+		for a[left] < pivot {
+			left++
+		}
+		for a[right] > pivot {
+			right--
+		}
+		if left < right {
+			a[left], a[right] = a[right], a[left]
+		}
+	}
+	println(fmt.Sprintf("  sort by pivot=%v > cursor=%v, a[:cursor]=%v, a[cursor]=%v, a[cursor+1:]=%v", pivot, left, a[:left], a[left], a[left+1:]))
 
-	for leftCur < rightCur {
-		for a[leftCur] < pivot {
-			leftCur++
-		}
-		for a[rightCur] > pivot {
-			rightCur--
-		}
-		if leftCur < rightCur {
-			a[leftCur], a[rightCur] = a[rightCur], a[leftCur]
-		}
-	}
-	println(fmt.Sprintf("after sort: pivot=%v, array=%v leftCur=%v, rightCur=%v", pivot, a, leftCur, rightCur))
-
-	if left < rightCur+1 {
-		QuickSort(a[:leftCur])
-	}
-	if leftCur < right-1 {
-		QuickSort(a[leftCur+1:])
-	}
+	QuickSort(a[:left])
+	QuickSort(a[left+1:])
 
 	return a
 }
