@@ -31,3 +31,11 @@ func TestMergeSort(t *testing.T) {
 		t.Error(fmt.Sprintf("Not correct sorted: sorted=%v, expected=%v", sorted, expected))
 	}
 }
+
+func TestSelectionSort(t *testing.T) {
+	sorted := SelectionSort(a)
+	println(fmt.Sprintf("complete: a=%v", a))
+	if !reflect.DeepEqual(sorted, expected) {
+		t.Error(fmt.Sprintf("Not correct sorted: sorted=%v, expected=%v", sorted, expected))
+	}
+}
