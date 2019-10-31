@@ -28,7 +28,7 @@ type HogeConverter struct {
 }
 
 func (c *HogeConverter) search() string {
-	c.searcher.Do("HogeConverter")
+	c.searcher.Do("Hoge")
 	return "Hoge"
 }
 
@@ -42,7 +42,7 @@ type FugaConverter struct {
 }
 
 func (c *FugaConverter) search() string {
-	c.searcher.Do("FugaConverter")
+	c.searcher.Do("Fuga")
 	return "Fuga"
 }
 func (c *FugaConverter) transform(name string) string {

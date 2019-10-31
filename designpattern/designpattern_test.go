@@ -6,15 +6,40 @@ import (
 	"testing"
 )
 
-func TestTemplateMethod(t *testing.T) {
+func TestConvert(t *testing.T) {
 	expected := []string{"Hoge(transformed)", "Fuga(transformed)"}
-	actual := make([]string, 0)
 
+	cases := []struct {
+		name    string
+		cnvFunc ConvertFunc
+	}{
+		{name: "TemplateMethodPattern", cnvFunc: TemplateMethodPattern},
+		{name: "StrategyPattern", cnvFunc: StrategyPattern},
+	}
+	for _, c := range cases {
+		actual := make([]string, 0)
+
+		c.cnvFunc(&actual)
+
+		if !reflect.DeepEqual(actual, expected) {
+			t.Errorf("Failed to convert by %v: expected=%v, actual=%v", c.name, expected, actual)
+		}
+	}
+}
+
+type ConvertFunc func(*[]string)
+
+func TemplateMethodPattern(a *[]string) {
 	for _, c := range NewConverterHolder(&support.Searcher{}).Converters {
-		c.Do(c, &actual)
+		c.Do(c, a)
 	}
+}
 
-	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Failed to convert: expected=%v, actual=%v", expected, actual)
+func StrategyPattern(a *[]string) {
+	ruleHolder := NewConvertRuleHolder()
+	service := ConvertService{
+		rules:    ruleHolder.rules,
+		searcher: &support.Searcher{},
 	}
+	service.Do(a)
 }

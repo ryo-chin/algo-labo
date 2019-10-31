@@ -4,5 +4,5 @@ type Searcher struct {
 }
 
 func (s *Searcher) Do(name string) {
-	println("searching by " + name + "...")
+	println("search " + name + "...")
 }
